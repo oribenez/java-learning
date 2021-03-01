@@ -1,6 +1,5 @@
-package maman12;
 /**
- * This class represents a Triangle object on a plain 
+ * Triangle.java represents a triangle in the Euclidean space. 
  * @author Ori Ben-Ezra
  * @version 22-02-2021
  */
@@ -9,10 +8,10 @@ public class Triangle {
     private Point _point1;
     private Point _point2;
     private Point _point3;
-    private static final double EPSILON = 0.001;
+    public static final double EPSILON = 0.001;
 
     /**
-     * Constructor which sets the triangle vertices to default values
+     * Construct a new Triangle (default constructor) from 3 default Points:(1,0),(-1,0),(0,1)
      */
     public Triangle() {
         //default values of the Triangle class
@@ -52,7 +51,7 @@ public class Triangle {
      * @param x3 The x coordiante of the third vertex
      * @param y3 The y coordiante of the third vertex
      */
-    public Triangle(int x1, int y1, int x2, int y2, int x3, int y3) {
+    public Triangle(double x1, double y1, double x2, double y2, double x3, double y3) {
         Point p1 = new Point(x1, y1);
         Point p2 = new Point(x2, y2);
         Point p3 = new Point(x3, y3);
@@ -71,7 +70,7 @@ public class Triangle {
     }
 
     /**
-     * Constructor which clones a triangle using other one.
+     * Constructor which clones a triangle using given triangle.
      * @param other A valid Triangle to clone
      */
     public Triangle(Triangle other) {
@@ -81,23 +80,26 @@ public class Triangle {
     }
 
     /**
+     * This method returns the triangle's first point
      * @return method which return the first point of this triangle
      */
-    private Point getPoint1() {
+    public Point getPoint1() {
         return _point1;
     }
 
     /**
+     * This method returns the triangle's second point
      * @return method which return the second point of this triangle
      */
-    private Point getPoint2() {
+    public Point getPoint2() {
         return _point2;
     }
 
     /**
+     *  This method returns the triangle's third point
      * @return method which return the third point of this triangle
      */
-    private Point getPoint3() {
+    public Point getPoint3() {
         return _point3;
     }
 
@@ -265,12 +267,25 @@ public class Triangle {
         double y2 = _point2.getY();
         double y3 = _point3.getY();
 
-        if (y1 < y2 && y1 < y3) 
+        if (y1 < y2 && y1 < y3) // the first point has the lowest Y coordinate
             return _point1;
-        else if (y2 < y1 && y2 < y3) 
+        else if (y2 < y1 && y2 < y3) // the second point has the lowest Y coordinate
             return _point2;
+        else if (y3 < y2 && y3 < y1) // the third point has the lowest Y coordinate
+            return _point3;
+            
+        // both of the points areat the same y level
+        //returning the left point 
+        double x1 = _point1.getX();
+        double x2 = _point2.getX();
+        double x3 = _point3.getX();
 
-        return _point3;
+        if (x1 < x2 && x1 < x3) // the first point has the lowest X coordinate
+            return _point1;
+        else if (x2 < x1 && x2 < x3)  // the second point has the lowest X coordinate
+            return _point2;
+            
+        return _point3;// the third point has the lowest X coordinate
     }
     /**
      * Method checks which vertex of this triangle has the highest y coordinate.
@@ -281,12 +296,25 @@ public class Triangle {
         double y2 = _point2.getY();
         double y3 = _point3.getY();
 
-        if (y1 > y2 && y1 > y3) 
+        if (y1 > y2 && y1 > y3) // the first point has the highest Y coordinate
             return _point1;
-        else if (y2 > y1 && y2 > y3) 
+        else if (y2 > y1 && y2 > y3) // the second point has the highest Y coordinate
             return _point2;
+        else if (y3 > y2 && y3 > y1) // the third point has the highest Y coordinate
+            return _point3;
 
-        return _point3;
+        // both of the points areat the same y level
+        //returning the left point 
+        double x1 = _point1.getX();
+        double x2 = _point2.getX();
+        double x3 = _point3.getX();
+
+        if (x1 < x2 && x1 < x3) // the first point has the highest X coordinate
+            return _point1;
+        else if (x2 < x1 && x2 < x3)  // the second point has the highest X coordinate
+            return _point2;
+            
+        return _point3;// the third point has the highest X coordinate
     }
 
     /**
@@ -312,7 +340,7 @@ public class Triangle {
      * @return True if this triangle is under the given argument triangle, otherwise false.
      */
     public boolean isUnder(Triangle other) {
-        return !this.isAbove(other);
+        return other.isAbove(this);
     }
 
     /**
@@ -337,9 +365,9 @@ public class Triangle {
         double c1 = _point2.distance(_point3);
 
         // a,b,c represents other triangle sides
-        double a2 = other._point1.distance(_point2);
-        double b2 = other._point1.distance(_point3);
-        double c2 = other._point2.distance(_point3);
+        double a2 = other._point1.distance(other._point2);
+        double b2 = other._point1.distance(other._point3);
+        double c2 = other._point2.distance(other._point3);
 
         if (epsilonEqual(a1,a2) || epsilonEqual(a1,b2) || epsilonEqual(a1,c2)) {
             if (epsilonEqual(b1,a2) || epsilonEqual(b1,b2) || epsilonEqual(b1,c2)) {

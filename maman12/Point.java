@@ -1,6 +1,5 @@
-package maman12;
 /**
- *  This class represents a Point object in the Cartesian coordinate system
+ *  Point.java represents a 2-Dimensional point in the Euclidean space.
  * @author Ori Ben-Ezra
  * @version 22-02-2021
  */
@@ -21,8 +20,8 @@ public class Point {
     }
 
     /**
-     * Constructor which initialize Point object variables using other point obj values
-     * @param other Represents Point object
+     * Copy constructor Creates a new Point identical to the given point
+     * @param other the Point to be copied
      */
     public Point(Point other) {
         _x = other._x;
@@ -30,38 +29,41 @@ public class Point {
     }
 
     /**
-     * @return X value of this Point object
+     * Returns the x coordinate.
+     * @return a double
      */
     public double getX(){
         return _x;
     }
 
     /**
-     * @return Y value of this Point object
+     * Returns the y coordinate.
+     * @return a double
      */
     public double getY(){
         return _y;
     }
 
     /**
-     * Sets X coordinate of this Point object
-     * @param num the desired num to change to.
+     * This method sets the x coordinate of the point.
+     * @param num The new x coordinate
      */
     public void setX(double num) {
         _x = num;
     }
 
     /**
-     * Sets Y coordinate of this Point object
-     * @param num the desired num to change to.
+     * This method sets the y coordinate of the point.
+     * @param num The new y coordinate
      */
     public void setY(double num) {
         _y = num;
     }
 
     /**
-     * @param other Point object to compare to
-     * @return true if this Point object equals to the object argument, otherwise false.
+     * Return true if the given point is equal to this point.
+     * @param other The point we are checking equality with
+     * @return true if the point other equals this point
      */
     public boolean equals(Point other) {
         if (other._x == _x && other._y == _y)
@@ -70,8 +72,9 @@ public class Point {
     }
 
     /**
-     * @param other Point object to compare to
-     * @return true if this Point object is above the object argument, otherwise false.
+     * Check if this point is above a received point.
+     * @param other The point to check if this point is above
+     * @return True if this point is above the other point
      */
     public boolean isAbove(Point other) {
         if (_y > other._y) 
@@ -80,43 +83,46 @@ public class Point {
     }
 
     /**
-     * @param other Point object to compare to
-     * @return true if this Point object is under the object argument, otherwise false.
+     * Check if this point is below a received point.
+     * @param other  The point to check if this point is below
+     * @return True if this point is below the other point
      */
     public boolean isUnder(Point other) {
         return !isAbove(other);
     }
 
     /**
-     * @param other Point object to compare to
-     * @return true if this Point object is on the left of the object argument, otherwise false.
+     * Check if this point is left of a received point.
+     * @param other The point to check if this point is left of
+     * @return True if this point is left of the other point
      */
     public boolean isLeft(Point other) {
-        if (_x > other._x) 
+        if (_x < other._x) 
             return true;
         return false;
     }
 
     /**
-     * @param other Point object to compare to
-     * @return true if this Point object is on the right of the object argument, otherwise false.
+     * Check if this point is right of a received point.
+     * @param other The point to check if this point is right of
+     * @return True if this point is right of the other point
      */
     public boolean isRight(Point other) {
         return !isLeft(other);
     }
 
     /**
-     * Method which calculates the distance between two arguments
-     * @param p Point object to measure distance to it
-     * @return distance between this Point object and the argument Point
+     * Check the distance between this point and a received point.
+     * @param p The point to check the distance from
+     * @return The distance between this point and a received point
      */
     public double distance(Point p) {
         return Math.sqrt(Math.pow(p._y - _y,2) + Math.pow(p._x - _x,2));
     }
 
     /**
-     * This method check in which quarter of the Cartesian coordinate system this point exists
-     * @return the quarter in which the point exists on it.
+     * Return number of quadrant or 0 if the point is on an axis
+     * @return an int representing the quadrant number
      */
     public int quadrant() {
         if (_x > AXIS_DEFAULT_VAL && _y > AXIS_DEFAULT_VAL) { // quarter I
@@ -132,8 +138,8 @@ public class Point {
     }
 
     /**
-     * A method which overrides the base class toString method
-     * @return Coordinates of this Point object
+     * Returns a string representation of this Point. The format of the string should be: (x,y)
+     * @return A string representation of a Point object
      */
     public String toString() {
         return "(" + _x + "," + _y + ")";

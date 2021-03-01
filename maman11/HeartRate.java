@@ -1,5 +1,3 @@
-package maman11;
-
 /**
  * HeartRate
  */

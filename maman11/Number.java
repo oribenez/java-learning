@@ -1,5 +1,3 @@
-package maman11;
-
 import java.util.Scanner;
 public class Number {
     

@@ -211,4 +211,48 @@ public class RGBImage {
 
         _imgGrid = newImgGrid;
     }
+
+    /**
+     * Method which move image to the right/left side by a specific number.
+     * positive offset will move the image to the right, negative offset will move the image to the left,
+     * 0 offset will not move the image.
+     * @param offset The number represents the offset that the image will move.
+     */
+    public void shiftCol(int offset) {
+        // original rows and columns
+        int rows = _imgGrid.length;
+        int cols = _imgGrid[0].length;
+
+        RGBColor[][] newImgGrid = new RGBColor[rows][cols];
+        
+        if (offset > 0) { // move image to the right
+            for (int i = 0; i < rows; i++) {
+                // place black cells
+                for (int j = 0; j < offset; j++) {
+                    newImgGrid[i][j] = new RGBColor();
+                }
+                
+                // place image cells
+                for (int j = offset; j < cols; j++) {
+                    newImgGrid[i][j] = new RGBColor(_imgGrid[i][j - offset]);
+                }
+            }
+        } else if(offset < 0) { // move image to the left
+            offset *= -1; // offset correction for further calculations
+
+            for (int i = 0; i < rows; i++) {
+                // place black cells
+                for (int j = cols; j > cols - offset; j--) {
+                    newImgGrid[i][j] = new RGBColor();
+                }
+                                
+                // place image cells
+                for (int j = cols - offset; j > 0; j--) {
+                    newImgGrid[i][j] = new RGBColor(_imgGrid[i][j + offset]);
+                }
+            }
+        }
+
+        _imgGrid = newImgGrid; // assignment of the new image grid
+    }
 }
